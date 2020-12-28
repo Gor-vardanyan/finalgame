@@ -10,17 +10,21 @@ const { auth } = require('./middleware/auth');
 const { chekrole } = require('./middleware/checkrole');
 
 const { register, logUser, LogoutUser, showUser, deleteUser, deleteByAdmin, profile } = require('./controllers/UserController');
-const { players_register } = require('./controllers/PlayersController');
+const { registerPlayer, showPlayers, deletePlayer } = require('./controllers/PlayersController');
 
-app.post('/admin/show', auth, chekrole, showUser); //show all users only for admin //works
-app.post('/admin/delete', auth, chekrole, deleteByAdmin); //deletes selected users only for admin //works
 
-app.post('/register', register); //register for users //works
-app.post('/login', logUser);//login //works
-app.post('/logoutuser', auth, LogoutUser);//logout for user //works
-app.post('/profile', auth, profile)
-app.post('/delete', auth, deleteUser);//deletes loged user //works
+//USER
+app.post('/register', register); //register for user //+
+app.post('/login', logUser); //login //+
+app.post('/logoutuser', auth, LogoutUser); //logout //+
+app.post('/profile', auth, profile); // shows the profile of the acount loged //+
+app.post('/delete', auth, deleteUser); //deletes loged user //+
+//ADMIN
+app.post('/admin/user/show', auth, chekrole, showUser); //show all users, only for admin //+
+app.post('/admin/user/delete', auth, chekrole, deleteByAdmin); //deletes selected user, only for admin //+
 
-app.post('/player_register',auth, chekrole, players_register);//registers new players //works
+app.post('/admin/player/register',auth, chekrole, registerPlayer); //registers new player, only for admin //+
+app.post('/admin/player/show',auth, chekrole, showPlayers); //show all players, only for admin //+
+app.post('/admin/player/delete',auth, chekrole, deletePlayer); //deletes selected player, only for admin //+
 
 app.listen( PORT, ()=> console.log("el servidor esta en el puerto " + PORT ));
