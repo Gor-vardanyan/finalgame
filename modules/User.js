@@ -25,11 +25,13 @@ const UsersSchema = new Schema({
     },
     credit: {
         type: Number,
-        required: true
+        required: true,
+        default: 0
     },
     players: {
         type: Array,
-        required: true
+        required: true,
+        default: [""]
     },    
     token:{
         type: String
