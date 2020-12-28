@@ -13,19 +13,19 @@ const PlayersSchema = new Schema({
         required: true
     },
     health:{
-        type: String,
+        type: Number,
         required: true
     },
     mana:{
-        type: String,
+        type: Number,
         required: true
     },
     strength:{
-        type: String,
+        type: Number,
         required: true
     },
     power:{
-        type: String,
+        type: Number,
         required: true
     },
     description:{

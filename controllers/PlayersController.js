@@ -16,14 +16,14 @@ const players_register = async (req, res) => {
             }).save();
     
             res.send({
-                message: "Player aded successfully.", ...Player
+                message: "Player added successfully.", ...Player
             })
         } catch (err) {
                 if (err.code === 11000) { // E11000 duplicate key error (unique true)
                     res.status(409); // conflict
                     console.log(err)
                     res.send({
-                        error: "Email already used."
+                        error: "Player already exist."
                     });
         
                 } else {
