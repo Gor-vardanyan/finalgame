@@ -1,5 +1,6 @@
 {
-  "name": "finalgame",
+  "name": "gorvar",
+  "password":"63305522",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
