@@ -12,7 +12,7 @@ const { auth } = require('./middleware/auth');
 const { chekrole } = require('./middleware/checkrole');
 
 const { register, logUser, LogoutUser, showUser, deleteUser, deleteByAdmin, profile } = require('./controllers/UserController');
-const { registerPlayer, showPlayers, deletePlayer } = require('./controllers/PlayersController');
+const { registerPlayer, showPlayers, deletePlayer, showPlayersUser } = require('./controllers/PlayersController');
 
 
 //USER
@@ -21,7 +21,7 @@ app.post('/login', logUser); //login //+
 app.post('/logoutuser', auth, LogoutUser); //logout //+
 app.post('/profile', auth, profile); // shows the profile of the acount loged //+
 app.post('/delete', auth, deleteUser); //deletes loged user //+
-app.post('/player/show',auth, showPlayers); //show all players, only for admin //+
+app.post('/player/show',auth, showPlayersUser); //show all players, only for admin //+
 
 //ADMIN
 app.post('/admin/user/show', auth, chekrole, showUser); //show all users, only for admin //+

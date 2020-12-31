@@ -1,4 +1,5 @@
-const PlayersModel = require('../modules/Players')
+const PlayersModel = require('../modules/Players');
+const UserModel = require('../modules/User');
 
 const registerPlayer = async (req, res) => {
     let bodyData = req.body;
@@ -38,6 +39,16 @@ const showPlayers = async (req, res) => {
         res.send(alldates)
 } catch (error) {console.log(error)}
 };
+const showPlayersUser = async (req, res) => {
+    try {
+        let nickname = req.user_nickname;
+        const players = UserModel.find({nickname});
+        const all = players.players;
+        console.log(all)
+        const alldates = await PlayersModel.find({...all});
+        res.send(alldates)
+} catch (error) {console.log(error)}
+};
 
 const deletePlayer = async (req, res) => {
     let selectdeleted = req.body.name;
@@ -62,6 +73,7 @@ const deletePlayer = async (req, res) => {
 };
 
 module.exports = {
+    showPlayersUser,
     showPlayers,
     deletePlayer,
     registerPlayer
