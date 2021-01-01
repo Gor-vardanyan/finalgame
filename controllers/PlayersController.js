@@ -46,7 +46,7 @@ const showPlayersUser = async (req, res) => {
         console.log(player_user)
         const all = player_user.players;
         let play = []
-        all.forEach(element => { play.push( await PlayersModel.find({name:element}));}); 
+        await all.forEach(element => { play.push( await PlayersModel.find({name:element}));}); 
         res.send(play)
 } catch (error) {console.log(error)}
 };
