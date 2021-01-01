@@ -42,7 +42,7 @@ const showPlayers = async (req, res) => {
 const showPlayersUser = async (req, res) => {
     try {
         let nickname = req.user_nickname;
-        const player_user = UserModel.find({nickname});
+        const player_user = await UserModel.find({nickname});
         console.log(player_user)
         const all = player_user.players;
         let play = []
