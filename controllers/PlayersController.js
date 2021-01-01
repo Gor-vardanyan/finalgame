@@ -43,6 +43,7 @@ const showPlayersUser = async (req, res) => {
     try {
         let nickname = req.user_nickname;
         const player_user = UserModel.find({nickname});
+        console.log(player_user)
         const all = player_user.players;
         console.log(all)
         const alldates = await PlayersModel.find({...all});
