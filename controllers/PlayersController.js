@@ -46,7 +46,7 @@ const showPlayersUser = async (req, res) => {
         console.log(player_user)
         const all = player_user.players;
         console.log(all)
-        const alldates = await PlayersModel.find({...all});
+        const alldates = await PlayersModel.find({all});
         res.send(alldates)
 } catch (error) {console.log(error)}
 };
