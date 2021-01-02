@@ -45,8 +45,6 @@ const showPlayersUser = async (req, res) => {
         let user_nickname = req.user_nickname;
         const user = await UserModel.findOne({nickname:user_nickname});
         const all_players = await PlayersModel.find({})        
-        console.log(user)
-        console.log(all_players)
         const my_players = []
         user.players.forEach(p_player =>{
             all_players.forEach(o_player => {
