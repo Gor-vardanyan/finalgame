@@ -39,15 +39,24 @@ const showPlayers = async (req, res) => {
         res.send(alldates)
 } catch (error) {console.log(error)}
 };
+
 const showPlayersUser = async (req, res) => {
     try {
-        let nickname = req.user_nickname;
-        const player_user = await UserModel.find({nickname});
-        console.log(player_user)
-        const all = player_user.players;
-        let play = []
-        await all.forEach(element => { play.push( await PlayersModel.find({name:element}));}); 
-        res.send(play)
+        let user_nickname = req.user_nickname;
+        const user = await UserModel.findOne({nickname:user_nickname});
+        const all_players = await PlayersModel.find({})        
+        console.log(user)
+        console.log(all_players)
+        const my_players = []
+        user.players.forEach(p_player =>{
+            all_players.forEach(o_player => {
+                if(p_player == o_player.name){
+                    my_players.push(o_player)
+                }
+            })
+        
+        })
+        res.send(my_players)
 } catch (error) {console.log(error)}
 };
 
