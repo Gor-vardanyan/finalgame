@@ -14,7 +14,7 @@ const profile = async (req, res) => {
     try {
         const dates = await UserModel.findOne({nickname});
         res.send(dates)
-} catch (error) {console.log(error)}
+    } catch (error) {console.log(error)}
 };
 
 const register = async (req, res) => {
@@ -44,6 +44,22 @@ const register = async (req, res) => {
             };
     };
 };
+const creditController = async (req, res) =>{
+    let nickname = req.user_nickname;
+    let bodydata = req.body;
+    try {
+        const User =  await UserModel.findOneAndUpdate({nickname},{ credit: bodydata});
+        res.send(User); 
+    } catch (error) {console.log(error)}
+}
+const buyplayer = async (req, res) =>{
+    let nickname = req.user_nickname;
+    let bodydata = req.body;
+    try {
+        await UserModel.findOneAndUpdate({nickname},{ $addToSet: { players: [bodydata]}});
+        res.send(User); 
+    } catch (error) {console.log(error)}
+}
 
 const logUser = async (req, res) => {
     let query = {nickname: req.body.nickname}
@@ -128,6 +144,8 @@ const deleteByAdmin = async (req, res) => {
 
 module.exports = {
     showUser,
+    creditController,
+    buyplayer,
     profile,
     register,
     logUser,
