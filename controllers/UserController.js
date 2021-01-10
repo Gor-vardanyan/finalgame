@@ -55,10 +55,12 @@ const creditController = async (req, res) =>{
 }
 const buyplayer = async (req, res) =>{
     let nickname = req.user_nickname;
-    let bodydata = req.body;
+    let bodydata = req.body.players;
     try {
         await UserModel.findOneAndUpdate({nickname},{ $addToSet: { players: [bodydata]}});
-        res.send(User); 
+        const sendUser = await UserModel.findOne({ nickname: nickname})
+
+        res.send(sendUser); 
     } catch (error) {console.log(error)}
 }
 
