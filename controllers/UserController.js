@@ -46,7 +46,7 @@ const register = async (req, res) => {
 };
 const creditController = async (req, res) =>{
     let nickname = req.user_nickname;
-    let bodydata = req.body;
+    let bodydata = req.body.credit;
     try {
         await UserModel.update({nickname: nickname},{ $set:{ credit: bodydata }})
         const sendUser = await UserModel.findOne({ nickname: nickname})
