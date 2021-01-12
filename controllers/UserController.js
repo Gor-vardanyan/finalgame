@@ -62,11 +62,11 @@ const buyplayer = async (req, res) =>{
         let user = await UserModel.findOne({ nickname: nickname})
         let money = user.credit - player.value;
         if(money<0){
-            return res.send({status:false,message:'No tienes credito suficiente'});
+            return res.send({status:false,message:'There isnt enough Credit'});
         }
         await UserModel.updateOne({nickname: nickname},{ $addToSet: { players: [bodydata]}});
         await UserModel.updateOne({nickname: nickname},{ $set:{ credit: money }})
-        res.send({status:true,message:'player Success'}); 
+        res.send({status:true, message:'Successful purchase', user}); 
     } catch (error) {console.log(error)}
 }
 
