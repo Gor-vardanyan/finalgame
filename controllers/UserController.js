@@ -12,7 +12,7 @@ const showUser = async (req, res) => {
 const profile = async (req, res) => {
     let nickname = req.user_nickname;
     try {
-        const dates = await UserModel.findOne({nickname});
+        const dates = await UserModel.findOne({ nickname: nickname });
         res.send(dates)
     } catch (error) {console.log(error)}
 };
