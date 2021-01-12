@@ -1,6 +1,7 @@
 const UserModel = require('../modules/User')
 const bcrypt = require("bcryptjs");
 const jwt = require('jsonwebtoken');
+const Players = require('../modules/Players');
 
 const showUser = async (req, res) => {
     try {
@@ -49,7 +50,7 @@ const creditController = async (req, res) =>{
     let bodydata = req.body.credit;
     try {
         await UserModel.update({nickname: nickname},{ $set:{ credit: bodydata }})
-        const sendUser = await UserModel.findOne({ nickname: nickname})
+        let sendUser = await UserModel.findOne({ nickname: nickname})
         res.send(sendUser); 
     } catch (error) {console.log(error)}
 }
@@ -57,10 +58,15 @@ const buyplayer = async (req, res) =>{
     let nickname = req.user_nickname;
     let bodydata = req.body.players;
     try {
-        await UserModel.findOneAndUpdate({nickname},{ $addToSet: { players: [bodydata]}});
-        const sendUser = await UserModel.findOne({ nickname: nickname})
-
-        res.send(sendUser); 
+        let player = await Players.findOne({name: bodydata})
+        let user = await UserModel.findOne({ nickname: nickname})
+        let money = user.credit - player.value;
+        if(money<0){
+            return res.send({status:false,message:'No tienes credito suficiente'});
+        }
+        await UserModel.updateOne({nickname: nickname},{ $addToSet: { players: [bodydata]}});
+        await UserModel.updateOne({nickname: nickname},{ $set:{ credit: money }})
+        res.send({status:true,message:'player Success'}); 
     } catch (error) {console.log(error)}
 }
 
