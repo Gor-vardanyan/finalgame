@@ -26,12 +26,12 @@ const UsersSchema = new Schema({
     credit: {
         type: Number,
         required: true,
-        default: 0
+        default: 15
     },
     players: {
         type: Array,
         required: true,
-        default: [""]
+        default: ["Ryu"]
     },    
     token:{
         type: String
